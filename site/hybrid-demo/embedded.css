@@ -98,7 +98,7 @@
 #demo .examples { display: flex; flex-wrap: wrap; gap: 7px; margin: 11px 0 17px; }
 #demo .example-chip { font-size: 14px; line-height: 1.5; text-align: left; border: 1px solid var(--line); background: var(--tint); color: #43536e; border-radius: 5px; padding: 6px 9px; }
 #demo .example-chip:hover { border-color: #aabde0; background: #edf3ff; }
-#demo .target-note { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 6px 0 0; }
+#demo .target-note { font-size: 14px; color: var(--muted); line-height: 1.5; min-height: 3em; margin: 6px 0 0; }
 #demo .target-note.selected { color: var(--blue); }
 #demo .task-result { border-top: 1px solid var(--line); padding-top: 19px; margin-top: 22px; min-height: 80px; }
 #demo .task-result p { font-size: 16px; line-height: 1.7; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
