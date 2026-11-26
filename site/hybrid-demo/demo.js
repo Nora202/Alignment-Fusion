@@ -102,14 +102,10 @@ async function checkService() {
       ? `Ready · ${String(health.device || 'CPU').toUpperCase()}`
       : (health.status === 'loading' || health.status === 'starting' ? 'Model is starting…' : 'Live service unavailable');
     $('service-status').className = state.ready ? 'ready' : 'offline';
-    $('live-service-note').textContent = state.ready
-      ? `${health.model || 'stage2_best'} · Orthogonal Fusion enabled. Requests run on the live service.`
-      : 'Saved scene results remain available. Check the connection again when the live service is ready.';
   } catch {
     state.ready = false;
     $('service-status').textContent = 'Live service unavailable';
     $('service-status').className = 'offline';
-    $('live-service-note').textContent = 'Saved scene results remain available. Live text inference is not connected at the moment.';
   } finally {
     state.checking = false;
     $('reconnect').hidden = state.ready;
@@ -216,7 +212,6 @@ async function runTask(task) {
     if (error instanceof TypeError || error.status === 503) {
       state.ready = false;
       $('service-status').textContent = 'Live service unavailable'; $('service-status').className = 'offline'; $('reconnect').hidden = false;
-      $('live-service-note').textContent = 'Saved scene results remain available. Reconnect to use live text inference.';
     }
   } finally {
     state.busy = false; state.pendingTask = null; updateControls();
