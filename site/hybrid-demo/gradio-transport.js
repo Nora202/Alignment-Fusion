@@ -1,15 +1,16 @@
 /**
  * Public Gradio API transport; importing this file performs no network request.
  *
- * const transport = createGradioTransport('owner/space');
+ * const transport = createGradioTransport('owner/space', { backend: 'cpu' });
  * const options = { signal: AbortSignal.timeout(120000), onStatus: showStatus };
  * const health = await transport.health(options); // Trust health.status, not queue status.
  * const result = await transport.infer({ scene_id, task, text, object_id }, options);
  *
- * Backend: /health -> one gr.JSON dictionary; /infer takes positional inputs
+ * CPU: /health; /infer takes positional inputs
  * [scene_id, task, text, object_id] -> one gr.JSON dictionary. -1 means no target.
+ * Explicit zerogpu mode uses /health_gpu and /infer_gpu with the same schema.
  * Each call owns its session, so cancelling health cannot reset an inference.
- * The caller owns timeout/retry policy. Cancelling is best effort: a GPU task
+ * The caller owns timeout/retry policy. Cancelling is best effort: a running task
  * that has started may finish on the server after the caller stops waiting.
  *
  * Client bundle is the official npm artifact, pinned and loaded on first use.
@@ -17,7 +18,7 @@
  * https://www.gradio.app/docs/js/js-client
  * https://www.gradio.app/guides/getting-started-with-the-js-client
  * https://huggingface.co/docs/hub/en/spaces-zerogpu
- * Public browser calls use anonymous quota. No owner token belongs here.
+ * ZeroGPU browser calls use anonymous GPU quota. No owner token belongs here.
  */
 export const GRADIO_CLIENT_VERSION = '2.8.0';
 export const GRADIO_CLIENT_URL = new URL(`./vendor/gradio-client-${GRADIO_CLIENT_VERSION}/index.min.js`, import.meta.url).href;
@@ -34,24 +35,37 @@ export class GradioTransportError extends Error {
   }
 }
 
-export function validateZeroGPUHealth(result) {
-  if (result?.status !== 'ready' || result.fusion !== true || result.device !== 'cuda'
-    || result.backend !== 'zerogpu' || result.model !== 'stage2_best'
+function backendSpec(backend) {
+  if (backend === 'cpu') return { device: 'cpu', label: 'CPU', gpuRequired: false, health: '/health', infer: '/infer' };
+  if (backend === 'zerogpu') return { device: 'cuda', label: 'ZeroGPU', gpuRequired: true, health: '/health_gpu', infer: '/infer_gpu' };
+  throw new TypeError('Inference backend must be explicitly configured as cpu or zerogpu.');
+}
+
+export function validateGradioHealth(result, backend = 'zerogpu') {
+  const spec = backendSpec(backend);
+  if (result?.status !== 'ready' || result.fusion !== true || result.device !== spec.device
+    || result.backend !== backend || result.gpu_execution_required !== spec.gpuRequired || result.model !== 'stage2_best'
     || result.strict_online_load !== true || result.fusion_parameters !== 16
-    || result.checkpoint_sha256 !== EXPECTED_CHECKPOINT_SHA256) {
-    throw new GradioTransportError('The service has not verified the required ZeroGPU model.', 'invalid_response');
+    || result.checkpoint_sha256 !== EXPECTED_CHECKPOINT_SHA256
+    || (backend === 'cpu' && result.cuda_initialized !== false)) {
+    throw new GradioTransportError(`The service has not verified the required ${spec.label} model.`, 'invalid_response');
   }
   return result;
 }
 
-export function validateZeroGPUInference(result) {
-  if (result?.device !== 'cuda' || result.fusion !== true || result.model !== 'stage2_best'
+export function validateGradioInference(result, backend = 'zerogpu') {
+  const spec = backendSpec(backend);
+  if (result?.device !== spec.device || result.fusion !== true || result.model !== 'stage2_best'
     || typeof result.text !== 'string' || !Number.isFinite(result.elapsed_ms) || result.elapsed_ms < 0
     || !(result.object_id === null || (Number.isInteger(result.object_id) && result.object_id >= -1))) {
-    throw new GradioTransportError('The service did not return a verified GPU inference result.', 'invalid_response');
+    throw new GradioTransportError(`The service did not return a verified ${spec.label} inference result.`, 'invalid_response');
   }
   return { ...result, object_id: result.object_id === -1 ? null : result.object_id };
 }
+
+// Preserve the explicit ZeroGPU validation API for existing integrations.
+export function validateZeroGPUHealth(result) { return validateGradioHealth(result, 'zerogpu'); }
+export function validateZeroGPUInference(result) { return validateGradioInference(result, 'zerogpu'); }
 
 function loadClient() {
   if (!clientModule) {
@@ -119,10 +133,13 @@ function queueStatus(event) {
   };
 }
 
-function readableError(cause) {
+function readableError(cause, backend) {
   if (cause?.name === 'AbortError' || cause?.name === 'TimeoutError' || cause instanceof GradioTransportError) return cause;
   const detail = String(messageOf(cause) || 'The demo service did not respond.');
   if (/quota|rate.?limit|too many requests|exceeded.*gpu|gpu.*exceeded/i.test(detail)) {
+    if (backend === 'cpu') {
+      return new GradioTransportError('The demo service reported a usage limit. Please try again later.', 'usage_limit', detail, cause);
+    }
     return new GradioTransportError(`Hugging Face usage limit reached. ${detail} Open the Space to check access and quota.`, 'quota', detail, cause);
   }
   if (/\b40[134]\b|unauthori|forbidden|private|authentication|sign.?in|log.?in/i.test(detail)) {
@@ -154,10 +171,11 @@ function cancelSubmission(job) {
 }
 
 /** onStatus receives {source, stage, message, raw, position?, size?, eta?}. */
-export function createGradioTransport(spaceId) {
+export function createGradioTransport(spaceId, { backend = 'zerogpu' } = {}) {
   if (typeof spaceId !== 'string' || !/^[\w.-]+\/[\w.-]+$/.test(spaceId)) {
     throw new TypeError('A Hugging Face Space ID in owner/space format is required.');
   }
+  const spec = backendSpec(backend);
   const spaceURL = `https://huggingface.co/spaces/${spaceId}`;
 
   async function call(endpoint, inputs, { signal, onStatus } = {}) {
@@ -205,7 +223,7 @@ export function createGradioTransport(spaceId) {
       completed = true;
       return result;
     } catch (cause) {
-      const error = readableError(cause);
+      const error = readableError(cause, backend);
       error.spaceURL = spaceURL;
       const message = error.name === 'TimeoutError' ? 'The request timed out. The service may still be starting or busy; please retry later.' : error.message;
       publish({ source: 'transport', stage: 'error', message, raw: error });
@@ -219,8 +237,8 @@ export function createGradioTransport(spaceId) {
   }
 
   return Object.freeze({
-    spaceId, spaceURL,
-    async health(options) { return validateZeroGPUHealth(await call('/health', [], options)); },
+    spaceId, spaceURL, backend,
+    async health(options) { return validateGradioHealth(await call(spec.health, [], options), backend); },
     async infer(payload, options) {
       const { scene_id, task, text = '', object_id = null } = payload || {};
       const target = object_id === null || object_id === undefined ? -1 : object_id;
@@ -229,8 +247,8 @@ export function createGradioTransport(spaceId) {
         || (task !== 'caption' && !text.trim()) || (task === 'caption' && !text.trim() && target === -1)) {
         throw new GradioTransportError('Choose a scene and provide text or a valid caption target.', 'invalid_input');
       }
-      const result = await call('/infer', [scene_id, task, text, target], options);
-      return validateZeroGPUInference(result);
+      const result = await call(spec.infer, [scene_id, task, text, target], options);
+      return validateGradioInference(result, backend);
     },
   });
 }

@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { createGradioTransport, validateZeroGPUHealth, validateZeroGPUInference } from './gradio-transport.js?v=d877f3878b38';
+import { createGradioTransport, validateGradioHealth, validateGradioInference } from './gradio-transport.js?v=64178ce2b524';
 
 const API_BASE = String(window.DEMO_API_BASE || '').replace(/\/+$/, '');
 const ASSET_BASE = String(window.DEMO_ASSET_BASE || '').replace(/\/+$/, '');
 const GRADIO_SPACE = String(window.DEMO_GRADIO_SPACE || '').trim();
-const gradioTransport = GRADIO_SPACE ? createGradioTransport(GRADIO_SPACE) : null;
+const INFERENCE_BACKEND = String(window.DEMO_INFERENCE_BACKEND ?? 'zerogpu').trim();
+const gradioTransport = GRADIO_SPACE ? createGradioTransport(GRADIO_SPACE, { backend: INFERENCE_BACKEND }) : null;
 const TASKS = ['segmentation', 'grounding', 'qa', 'caption'];
 const RUN_LABELS = { grounding: 'Locate object', qa: 'Answer question', caption: 'Generate caption' };
 const RUNNING_LABELS = { grounding: 'Locating object…', qa: 'Generating answer…', caption: 'Generating caption…' };
@@ -69,7 +70,7 @@ async function requestLive(method, payload, onStatus) {
   const options = { signal: controller.signal, onStatus };
   try {
     const result = await (method === 'health' ? gradioTransport.health(options) : gradioTransport.infer(payload, options));
-    return method === 'health' ? validateZeroGPUHealth(result) : validateZeroGPUInference(result);
+    return method === 'health' ? validateGradioHealth(result, INFERENCE_BACKEND) : validateGradioInference(result, INFERENCE_BACKEND);
   } finally { clearTimeout(timer); }
 }
 function currentSession() {
@@ -237,7 +238,7 @@ async function runTask(task) {
     const message = error.name === 'AbortError' || error.name === 'TimeoutError'
       ? 'The request took too long. Please try again when the service is less busy.'
       : (error instanceof TypeError ? 'The inference service could not be reached. Check the connection and try again.' : error.message);
-    session.results[task] = { error: message, space_url: error.code === 'quota' ? gradioTransport?.spaceURL : null };
+    session.results[task] = { error: message, space_url: INFERENCE_BACKEND === 'zerogpu' && error.code === 'quota' ? gradioTransport?.spaceURL : null };
     if (state.scene.id === sceneId) renderResult(task);
     if (error instanceof TypeError || error.status === 503 || ['connection', 'access', 'client_load', 'invalid_response'].includes(error.code)) {
       state.ready = false;
