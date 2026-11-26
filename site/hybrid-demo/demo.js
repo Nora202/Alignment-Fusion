@@ -270,6 +270,7 @@ function instanceId(object) {
 }
 function updateAppearance() {
   const isSaved = state.task === 'segmentation';
+  const hasSelection = state.selectedId !== null;
   document.querySelector('.view-switch').hidden = !isSaved;
   $('viewer-badge').textContent = isSaved ? 'Stage 1 predictions' : 'Precomputed proposal set · live language inference';
   if (!rgbRoot || !instancesRoot) return;
@@ -286,13 +287,18 @@ function updateAppearance() {
     const vertexColors = !selected;
     if (material.vertexColors !== vertexColors) { material.vertexColors = vertexColors; material.needsUpdate = true; }
     material.color.set(selected ? '#df4b27' : '#ffffff');
-    material.opacity = selected ? 0.98 : (state.selectedId === null ? 1 : (id < 0 ? 0.2 : 0.4));
+    material.opacity = selected ? 0.98 : (hasSelection ? (id < 0 ? 0.16 : 0.24) : 1);
     material.depthTest = !selected;
     material.depthWrite = selected || state.selectedId === null;
     material.size = Math.max(sceneRadius * 0.006, 0.008) * (selected ? 1.12 : 1);
   });
   update(instancesRoot, false); update(liveRoot, true);
-  rgbRoot.traverse((object) => { if (object.isPoints) object.material.size = Math.max(sceneRadius * 0.006, 0.008); });
+  rgbRoot.traverse((object) => {
+    if (!object.isPoints) return;
+    object.material.size = Math.max(sceneRadius * 0.006, 0.008);
+    object.material.opacity = hasSelection ? 0.24 : 1;
+    object.material.depthWrite = !hasSelection;
+  });
   requestRender();
 }
 function populateInstanceSelect() {
