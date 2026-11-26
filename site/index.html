@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a4fc4'/%3E%3Cpath d='M7 23 16 7l9 16M11 17h10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css?v=2"><script defer src="script.js"></script>
 
-<link rel="stylesheet" href="hybrid-demo/embedded.css?v=dbb9eab148a0">
+<link rel="stylesheet" href="hybrid-demo/embedded.css?v=68519bc81677">
 <script src="hybrid-demo/config.js?v=5a031f2caf3f"></script>
 <script type="importmap">{"imports":{"three":"./hybrid-demo/vendor/three-0.170.0/build/three.module.js","three/addons/":"./hybrid-demo/vendor/three-0.170.0/examples/jsm/"}}</script>
 <script defer src="hybrid-demo/bootstrap.js?v=1110f76e2ff7"></script>
@@ -52,17 +52,17 @@
           <div class="detail-list"><div><span>Scene</span><strong id="saved-scene-name">Loading…</strong></div><div><span>Predicted instances</span><strong id="instance-count">—</strong></div><div><span>Model</span><strong>Stage 1</strong></div></div>
         </section>
         <section class="task-panel" id="panel-grounding" role="tabpanel" aria-labelledby="tab-grounding" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Which object do you mean?</h2><p>Describe an object using its appearance or its position. The model will select and highlight a target instance.</p>
+          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Which object do you mean?</h2>
           <form data-task="grounding"><label for="grounding-text">Object description</label><textarea id="grounding-text" name="text" rows="3" maxlength="500" placeholder="The chair closest to the table" required></textarea><div class="examples" id="grounding-examples" aria-label="Example object descriptions"></div><button class="button primary run-button" type="submit" disabled>Locate object</button></form>
           <div class="task-result" id="grounding-result" role="status" aria-live="polite"><p class="result-placeholder">The prediction will appear here and highlight an object in the scene.</p></div>
         </section>
         <section class="task-panel" id="panel-qa" role="tabpanel" aria-labelledby="tab-qa" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Ask about this scene</h2><p>Enter a question about the objects, colors, or spatial relationships in the selected scene.</p>
+          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Ask about this scene</h2>
           <form data-task="qa"><label for="qa-text">Your question</label><textarea id="qa-text" name="text" rows="3" maxlength="500" placeholder="What color is the table?" required></textarea><div class="examples" id="qa-examples" aria-label="Example questions"></div><button class="button primary run-button" type="submit" disabled>Answer question</button></form>
           <div class="task-result" id="qa-result" role="status" aria-live="polite"><p class="result-placeholder">The model’s answer will appear here.</p></div>
         </section>
         <section class="task-panel" id="panel-caption" role="tabpanel" aria-labelledby="tab-caption" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Describe a target instance</h2><p>Select an object in the 3D view, or describe which object you want to caption. The model will generate an object-level description.</p>
+          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Describe a target instance</h2>
           <form data-task="caption"><label for="caption-text">Target description <span class="optional">(optional if an instance is selected)</span></label><textarea id="caption-text" name="text" rows="3" maxlength="500" placeholder="The chair beside the table"></textarea><p id="caption-target" class="target-note">Select an instance or enter a target description.</p><div class="examples" id="caption-examples" aria-label="Example caption targets"></div><button class="button primary run-button" type="submit" disabled>Generate caption</button></form>
           <div class="task-result" id="caption-result" role="status" aria-live="polite"><p class="result-placeholder">The caption will appear here alongside its highlighted target.</p></div>
         </section>
