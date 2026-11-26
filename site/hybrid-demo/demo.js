@@ -105,6 +105,7 @@ function updateControls() {
   $('instance-select').disabled = state.busy || !state.scene;
   $('clear-selection').disabled = state.busy || state.selectedId === null;
   $('reconnect').disabled = state.busy || state.checking;
+  $('reconnect').closest('.service-card').hidden = state.task === 'segmentation' || state.ready || state.checking;
   const selected = state.selectedId !== null ? objectById(state.selectedId) : null;
   $('caption-target').textContent = selected
     ? `Selected target: ${objectTitle(selected)}. A text description will locate a new target.`
@@ -114,27 +115,16 @@ function updateControls() {
 async function checkService() {
   if (state.checking) return;
   state.checking = true; state.ready = false;
-  $('service-status').textContent = 'Checking service…';
-  $('service-status').className = '';
+  $('reconnect').title = '';
   updateControls();
   try {
-    const health = await requestLive('health', null, (status) => {
-      if (status.message) $('service-status').textContent = status.message;
-    });
+    const health = await requestLive('health');
     state.ready = health.status === 'ready' && health.fusion === true;
-    $('service-status').textContent = state.ready
-      ? `Ready · ${health.backend === 'zerogpu' ? 'ZeroGPU' : String(health.device || 'CPU').toUpperCase()}`
-      : (health.status === 'loading' || health.status === 'starting' ? 'Model is starting…' : 'Live service unavailable');
-    $('service-status').title = '';
-    $('service-status').className = state.ready ? 'ready' : 'offline';
   } catch (error) {
     state.ready = false;
-    $('service-status').textContent = error.name === 'TimeoutError' || error.name === 'AbortError' ? 'Service startup timed out' : 'Live service unavailable';
-    $('service-status').title = error.message || '';
-    $('service-status').className = 'offline';
+    $('reconnect').title = error.message || '';
   } finally {
     state.checking = false;
-    $('reconnect').hidden = state.ready;
     updateControls();
   }
 }
@@ -142,9 +132,6 @@ function setTask(task, focus = false) {
   if (!TASKS.includes(task)) return;
   const changedGroup = (state.task === 'segmentation') !== (task === 'segmentation');
   state.task = task;
-  for (const element of document.querySelectorAll('[data-language-only]')) {
-    element.hidden = task === 'segmentation';
-  }
   if (changedGroup) state.selectedId = null;
   populateInstanceSelect();
   for (const item of TASKS) {
@@ -245,7 +232,7 @@ async function runTask(task) {
     if (state.scene.id === sceneId) renderResult(task);
     if (error instanceof TypeError || error.status === 503 || ['connection', 'access', 'client_load', 'invalid_response'].includes(error.code)) {
       state.ready = false;
-      $('service-status').textContent = 'Live service unavailable'; $('service-status').className = 'offline'; $('reconnect').hidden = false;
+      $('reconnect').title = error.message || '';
     }
   } finally {
     state.busy = false; state.pendingTask = null; updateControls();

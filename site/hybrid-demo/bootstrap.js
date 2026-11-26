@@ -5,10 +5,6 @@
     if (completed) return;
     completed = true;
     console.error('Demo startup failed:', error);
-    const status = document.getElementById('service-status');
-    if (status) { status.textContent = 'Demo could not start'; status.className = 'offline'; }
-    const note = document.getElementById('live-service-note');
-    if (note) note.textContent = 'The demo could not finish loading. Reload the page to try again.';
     const message = document.getElementById('viewer-message');
     if (message) {
       message.hidden = false; message.classList.add('error');
@@ -22,5 +18,5 @@
     if (select) { select.replaceChildren(new Option('Scenes unavailable', '')); select.disabled = true; }
   }
   const watchdog = setTimeout(() => showFailure(new Error('Startup exceeded 25 seconds')), 25000);
-  import('./demo.js?v=5235cde58e15').then(() => { completed = true; clearTimeout(watchdog); }).catch((error) => { clearTimeout(watchdog); showFailure(error); });
+  import('./demo.js?v=9f173ba4d84f').then(() => { completed = true; clearTimeout(watchdog); }).catch((error) => { clearTimeout(watchdog); showFailure(error); });
 })();

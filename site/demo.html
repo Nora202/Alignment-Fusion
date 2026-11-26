@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="hybrid-demo/demo.css?v=44eab9b38f28">
   <script src="hybrid-demo/config.js?v=5a031f2caf3f"></script>
   <script type="importmap">{"imports":{"three":"./hybrid-demo/vendor/three-0.170.0/build/three.module.js","three/addons/":"./hybrid-demo/vendor/three-0.170.0/examples/jsm/"}}</script>
-  <script defer src="hybrid-demo/bootstrap.js?v=2ae7d8b3ba68"></script>
+  <script defer src="hybrid-demo/bootstrap.js?v=1110f76e2ff7"></script>
 </head>
 <body>
   <a class="skip-link" href="#tasks">Skip to the demo</a>
@@ -20,7 +20,7 @@
   <main>
     <div class="intro-row">
       <div><p class="eyebrow">ALIGNMENT-FUSION DEMO</p><h1>Explore the scene.<br class="small-break"> Interact through language.</h1></div>
-      <div class="service-card" data-language-only hidden><span class="service-label">Live Stage 2</span><strong id="service-status" role="status">Checking service…</strong><button class="text-button" id="reconnect" type="button" hidden>Check connection</button></div>
+      <div class="service-card" hidden><button class="text-button" id="reconnect" type="button">Check connection</button></div>
     </div>
     <div id="tasks" class="task-tabs" role="tablist" aria-label="3D understanding tasks">
       <button id="tab-segmentation" class="task-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-segmentation" tabindex="0" data-task="segmentation"><span>Instance Segmentation</span></button>
@@ -65,7 +65,6 @@
         </div>
       </div>
     </div>
-    <p class="demo-footnote" data-language-only hidden>Segmentation displays saved Stage 1 predictions. Language tasks use a separate, precomputed proposal set and matching features; grounding, answers, and captions are computed by <strong>stage2_best</strong> when you submit a request.</p>
   </main>
   <footer><span>From <strong>Alignment</strong> to <strong>Fusion</strong> in 3D Vision-Language</span><a href="https://nora202.github.io/Alignment-Fusion/">About this work</a></footer>
 </body>

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="hybrid-demo/embedded.css?v=dbb9eab148a0">
 <script src="hybrid-demo/config.js?v=5a031f2caf3f"></script>
 <script type="importmap">{"imports":{"three":"./hybrid-demo/vendor/three-0.170.0/build/three.module.js","three/addons/":"./hybrid-demo/vendor/three-0.170.0/examples/jsm/"}}</script>
-<script defer src="hybrid-demo/bootstrap.js?v=2ae7d8b3ba68"></script>
+<script defer src="hybrid-demo/bootstrap.js?v=1110f76e2ff7"></script>
 </head>
 <body>
 <a class="skip" href="#demo">Skip to content</a>
@@ -27,7 +27,7 @@
 <section id="demo" class="inline-demo" aria-labelledby="demo-title">
 <div class="intro-row">
       <div><p class="eyebrow">ALIGNMENT-FUSION DEMO</p><h2 id="demo-title">Explore the scene.<br class="small-break"> Interact through language.</h2></div>
-      <div class="service-card" data-language-only hidden><span class="service-label">Live Stage 2</span><strong id="service-status" role="status">Checking service…</strong><button class="text-button" id="reconnect" type="button" hidden>Check connection</button></div>
+      <div class="service-card" hidden><button class="text-button" id="reconnect" type="button">Check connection</button></div>
     </div>
     <div id="tasks" class="task-tabs" role="tablist" aria-label="3D understanding tasks">
       <button id="tab-segmentation" class="task-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-segmentation" tabindex="0" data-task="segmentation"><span>Instance Segmentation</span></button>
@@ -72,7 +72,6 @@
         </div>
       </div>
     </div>
-    <p class="demo-footnote" data-language-only hidden>Segmentation displays saved Stage 1 predictions. Language tasks use a separate, precomputed proposal set and matching features; grounding, answers, and captions are computed by <strong>stage2_best</strong> when you submit a request.</p>
 </section>
 <!-- END INLINE DEMO -->
 <section class="section abstract"><div class="section-label">01 / ABSTRACT</div><div><h2>Better correspondence.<br>Controlled adaptation.</h2><p>Unified 3D vision-language systems must combine complementary geometry, scale, and appearance cues while supporting tasks from instance segmentation to language-guided reasoning. Existing methods often process point clouds, voxel grids, and multi-view images independently; directly combining these heterogeneous representations may leave substantial feature discrepancy unresolved, while subsequent unconstrained adaptation may distort their internal geometry.</p><p>We propose an <strong>align-then-fuse</strong> framework that first applies triple pairwise cosine alignment to establish segment-level correspondence across the three representations and then retrieves task-conditioned features with a prompt-guided query decoder. Before fusion, representation-specific query features are transformed by learnable mappings constrained to the special orthogonal group. These mappings preserve inner products and Euclidean distances within each representation, permitting controlled representation-specific re-parameterisation without arbitrarily distorting its internal geometry. The transformed features are subsequently combined through Adaptive Fusion under downstream task supervision.</p><p>Experiments cover eight datasets for instance segmentation, visual grounding, question answering, and dense captioning. Compared with PQ3D, the model improves average precision by 3.2 points on ScanNet200 and grounding accuracy by 2.9, 10.6, 4.6, and 4.1 points on ScanRefer, Nr3D, Sr3D, and Multi3DRefer, respectively, while also improving performance on ScanQA, SQA3D, and Scan2Cap. Ablations further support the complementary roles of alignment and orthogonal re-parameterisation and the effectiveness of Adaptive Fusion.</p></div></section>
