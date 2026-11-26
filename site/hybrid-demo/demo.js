@@ -15,7 +15,7 @@ const PLACEHOLDERS = {
 const $ = (id) => document.getElementById(id);
 const state = {
   scenes: [], scene: null, task: 'segmentation', selectedId: null,
-  mode: 'rgb', ready: false, busy: false, pendingTask: null,
+  ready: false, busy: false, pendingTask: null,
   sceneVersion: 0, sessions: new Map(), checking: false,
 };
 let renderer, camera, controls, rgbRoot, instancesRoot, liveRoot;
@@ -271,17 +271,15 @@ function instanceId(object) {
 function updateAppearance() {
   const isSaved = state.task === 'segmentation';
   const hasSelection = state.selectedId !== null;
-  document.querySelector('.view-switch').hidden = !isSaved;
-  $('viewer-badge').textContent = isSaved ? 'Stage 1 predictions' : 'Precomputed proposal set · live language inference';
   if (!rgbRoot || !instancesRoot) return;
-  rgbRoot.visible = !isSaved || state.mode === 'rgb';
-  instancesRoot.visible = isSaved && (state.mode === 'instances' || state.selectedId !== null);
-  if (liveRoot) liveRoot.visible = !isSaved && state.selectedId !== null;
+  rgbRoot.visible = true;
+  instancesRoot.visible = isSaved && hasSelection;
+  if (liveRoot) liveRoot.visible = !isSaved && hasSelection;
   const update = (root, live) => root?.traverse((object) => {
     if (!object.isPoints) return;
     const id = instanceId(object);
-    const selected = state.selectedId !== null && id === state.selectedId && live !== isSaved;
-    object.visible = live ? selected : (isSaved && (state.mode === 'instances' || selected));
+    const selected = hasSelection && id === state.selectedId && live !== isSaved;
+    object.visible = selected;
     object.renderOrder = selected ? 2 : 0;
     const material = object.material;
     const vertexColors = !hasSelection;
@@ -461,8 +459,6 @@ $('clear-selection').addEventListener('click', () => selectInstance(null));
 $('reset-camera').addEventListener('click', resetCamera);
 $('reconnect').addEventListener('click', checkService);
 $('retry-scene').addEventListener('click', () => { if (state.scene) loadScene(state.scene); else loadScenes(); });
-for (const radio of document.querySelectorAll('input[name="view-mode"]')) radio.addEventListener('change', () => { if (radio.checked) { state.mode = radio.value; updateAppearance(); } });
-$('show-instance-colors').addEventListener('click', () => { state.mode = 'instances'; document.querySelector('input[name="view-mode"][value="instances"]').checked = true; updateAppearance(); });
 initViewer();
 updateControls();
 await Promise.allSettled([loadScenes(), checkService()]);

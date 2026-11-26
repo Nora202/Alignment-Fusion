@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="demo.css">
   <script src="config.js"></script>
   <script type="importmap">{"imports":{"three":"./vendor/three-0.170.0/build/three.module.js","three/addons/":"./vendor/three-0.170.0/examples/jsm/"}}</script>
-  <script defer src="bootstrap.js?v=579d2b293e3b"></script>
+  <script defer src="bootstrap.js?v=df70a49c14b2"></script>
 </head>
 <body>
   <a class="skip-link" href="#tasks">Skip to the demo</a>
@@ -32,11 +32,9 @@
       <section class="viewer-card" aria-label="Shared 3D scene viewer">
         <div class="viewer-toolbar">
           <div class="scene-control"><label for="scene-select">Scene</label><select id="scene-select" disabled><option>Loading scenes…</option></select></div>
-          <fieldset class="view-switch"><legend class="sr-only">Scene appearance</legend><label><input type="radio" name="view-mode" value="rgb" checked><span>Original color</span></label><label><input type="radio" name="view-mode" value="instances"><span>Instance colors</span></label></fieldset>
         </div>
         <div id="viewer" class="viewer" aria-label="3D point cloud. Drag to rotate, scroll to zoom, and click an instance to select it.">
           <div id="viewer-message" class="viewer-message" role="status"><span class="loading-ring" aria-hidden="true"></span><span id="viewer-message-text">Loading 3D scene…</span><button id="retry-scene" class="button secondary" type="button" hidden>Reload scene</button></div>
-          <div id="viewer-badge" class="viewer-badge" aria-hidden="true">Stage 1 predictions</div>
           <button id="reset-camera" class="viewer-reset" type="button" disabled>Reset view</button>
         </div>
         <p class="viewer-help">Drag to rotate · Scroll to zoom · Right-drag to pan · Click an instance to select</p>
@@ -44,10 +42,8 @@
       </section>
       <div class="task-column">
         <section class="task-panel" id="panel-segmentation" role="tabpanel" aria-labelledby="tab-segmentation" tabindex="0">
-          <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2><p>Explore saved predictions from <strong>stage1_special_best</strong>. Switch to instance colors to see the segmentation, then select an object to inspect it.</p>
+          <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2><p>Explore saved predictions from <strong>stage1_special_best</strong>. Select an object in the scene or from the list to inspect it.</p>
           <div class="detail-list"><div><span>Scene</span><strong id="saved-scene-name">Loading…</strong></div><div><span>Predicted instances</span><strong id="instance-count">—</strong></div><div><span>Model</span><strong>Stage 1</strong></div></div>
-          <p class="panel-note">Rotation, zoom, selection, and highlighting run in your browser. This tab displays saved segmentation results.</p>
-          <button id="show-instance-colors" class="button primary" type="button">View instance colors</button>
         </section>
         <section class="task-panel" id="panel-grounding" role="tabpanel" aria-labelledby="tab-grounding" tabindex="0" hidden>
           <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Which object do you mean?</h2><p>Describe an object using its appearance or its position. The model will select and highlight a target instance.</p>
