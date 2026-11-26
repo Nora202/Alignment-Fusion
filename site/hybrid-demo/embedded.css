@@ -64,25 +64,22 @@
 #demo .viewer-message { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 30px; text-align: center; font-size: 14px; color: var(--muted); background: #f5f8fdeb; z-index: 4; }
 #demo .viewer-message.error { background: #f7f9fd; }
 #demo .loading-ring { width: 24px; height: 24px; border: 2px solid #cedaf0; border-top-color: var(--blue); border-radius: 50%; }
-#demo .viewer-help { font-size: 12px; color: var(--muted); padding: 10px 16px; margin: 0; border-top: 1px solid var(--line); background: #fff; }
-#demo .selection-card { grid-area: 2 / 1; align-self: end; margin-top: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
-#demo .selection-card .viewer-help { border-top: 0; }
-#demo .instance-control { padding: 15px 16px; border-top: 1px solid var(--line); }
+#demo .viewer-help { flex: 0 0 auto; font-size: 12px; color: var(--muted); padding: 10px 16px; margin: 0; border-top: 1px solid var(--line); background: #fff; }
+#demo .selection-card { margin-top: auto; padding-top: 20px; }
+#demo .instance-control { padding: 0; }
 #demo label { display: block; font-size: 14px; font-weight: 600; }
 #demo .instance-row { display: flex; gap: 9px; margin-top: 7px; }
 #demo .instance-row select { flex: 1; min-width: 0; border: 1px solid #ccd6e7; border-radius: 5px; padding: 9px 30px 9px 10px; background: #fff; font-size: 14px; color: var(--ink); }
 #demo .instance-meta { font-size: 14px; line-height: 1.5; min-height: 3em; margin: 8px 0 0; color: var(--muted); }
-#demo .task-column { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr auto; align-items: stretch; gap: 16px; min-width: 0; }
+#demo .task-column { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr; align-items: stretch; min-width: 0; }
 #demo .task-panel { grid-area: 1 / 1; min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); padding: 23px; background: #fff; }
+#demo #panel-segmentation { display: flex; flex-direction: column; }
 /* Keep every tab's natural size in the shared row without exposing inactive controls. */
 #demo .task-column > .task-panel[hidden] { display: block !important; visibility: hidden; pointer-events: none; }
+#demo #panel-segmentation[hidden] { display: flex !important; }
 #demo .mode-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--blue); margin-bottom: 12px; }
 #demo .mode-label.saved { color: #647188; }
 #demo .task-panel > p { font-size: 16px; color: var(--muted); margin: 0 0 22px; line-height: 1.7; }
-#demo .detail-list { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 7px 0; margin: 22px 0; }
-#demo .detail-list > div { display: flex; justify-content: space-between; gap: 20px; padding: 9px 0; font-size: 14px; }
-#demo .detail-list span { color: var(--muted); }
-#demo .detail-list strong { font-weight: 600; text-align: right; }
 #demo .task-panel > .panel-note { font-size: 13px; margin-bottom: 22px; }
 #demo .button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #ccd6e7; border-radius: 5px; font-size: 14px; font-weight: 600; padding: 10px 16px; line-height: 1.5; background: #fff; transition: background .15s; }
 #demo .primary { background: var(--blue); border-color: var(--blue); color: #fff; }
@@ -129,7 +126,6 @@
   #demo .task-panel { padding: 24px; }
   #demo .demo-footnote { margin-top: 20px; }
   #demo .task-column { scroll-margin-top: 90px; }
-  #demo .selection-card { margin-top: 0; }
 }
 @media (max-width: 480px) {
   #demo { padding-bottom: 30px; scroll-margin-top: 20px; }
@@ -147,7 +143,6 @@
   #demo .view-switch label { flex: 1; text-align: center; }
   #demo .viewer { height: 360px; }
   #demo .viewer-help { font-size: 12px; padding: 9px 12px; }
-  #demo .instance-control { padding: 13px 12px; }
   #demo .instance-row select { font-size: 14px; }
   #demo .task-panel { padding: 20px; }
   #demo h2 { font-size: 23px; }

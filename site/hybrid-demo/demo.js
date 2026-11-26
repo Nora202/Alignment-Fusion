@@ -9,6 +9,7 @@ const GRADIO_SPACE = String(window.DEMO_GRADIO_SPACE || '').trim();
 const INFERENCE_BACKEND = String(window.DEMO_INFERENCE_BACKEND ?? 'zerogpu').trim();
 const gradioTransport = GRADIO_SPACE ? createGradioTransport(GRADIO_SPACE, { backend: INFERENCE_BACKEND }) : null;
 const TASKS = ['segmentation', 'grounding', 'qa', 'caption'];
+const INSTANCE_HELP = 'You can choose an instance from this list or scene view.';
 const RUN_LABELS = { grounding: 'Locate object', qa: 'Answer question', caption: 'Generate caption' };
 const RUNNING_LABELS = { grounding: 'Locating object…', qa: 'Generating answer…', caption: 'Generating caption…' };
 const PLACEHOLDERS = {
@@ -102,8 +103,8 @@ function updateControls() {
     input.disabled = state.busy;
   }
   $('scene-select').disabled = state.busy || !state.scenes.length;
-  $('instance-select').disabled = state.busy || !state.scene;
-  $('clear-selection').disabled = state.busy || state.selectedId === null;
+  $('instance-select').disabled = state.task !== 'segmentation' || state.busy || !state.scene;
+  $('clear-selection').disabled = state.task !== 'segmentation' || state.busy || state.selectedId === null;
   $('reconnect').disabled = state.busy || state.checking;
   $('reconnect').closest('.service-card').hidden = state.task === 'segmentation' || state.ready || state.checking;
   const selected = state.selectedId !== null ? objectById(state.selectedId) : null;
@@ -321,22 +322,23 @@ function updateAppearance() {
   requestRender();
 }
 function populateInstanceSelect() {
-  const saved = state.task === 'segmentation';
-  $('instance-select-label').textContent = saved ? 'Selected instance' : 'Selected target proposal';
+  if (state.task !== 'segmentation') return;
   const select = $('instance-select');
-  select.replaceChildren(new Option(saved ? 'Select an instance in the scene' : 'Select a target proposal', ''));
-  for (const object of objectsFor()) select.add(new Option(objectTitle(object), String(object.id)));
+  select.replaceChildren(new Option('Select an instance in the scene', ''));
+  for (const object of objectsFor('segmentation')) select.add(new Option(objectTitle(object, 'segmentation'), String(object.id)));
   select.value = state.selectedId === null ? '' : String(state.selectedId);
 }
 function selectInstance(value) {
   const id = value === null || value === '' || value === undefined ? null : Number(value);
   const object = id !== null ? objectById(id) : null;
   state.selectedId = object ? id : null;
-  $('instance-select').value = object ? String(id) : '';
-  const confidence = object ? formatConfidence(object.confidence) : null;
-  $('instance-meta').textContent = object
-    ? `${objectTitle(object)}${confidence ? ` · Confidence ${confidence}` : ''}`
-    : (state.task === 'segmentation' ? 'You can also choose an instance from this list.' : 'Choose a proposal here or locate a target using text.');
+  if (state.task === 'segmentation') {
+    $('instance-select').value = object ? String(id) : '';
+    const confidence = object ? formatConfidence(object.confidence) : null;
+    $('instance-meta').textContent = object
+      ? `${objectTitle(object)}${confidence ? ` · Confidence ${confidence}` : ''}`
+      : INSTANCE_HELP;
+  }
   updateAppearance(); updateControls();
 }
 function resetCamera() {
@@ -387,10 +389,8 @@ function chooseScene(id) {
   if (!scene) return;
   state.scene = scene; state.selectedId = null;
   $('scene-select').value = scene.id;
-  $('saved-scene-name').textContent = scene.name || scene.id;
-  $('instance-count').textContent = String(scene.objects.length);
   populateInstanceSelect();
-  $('instance-meta').textContent = 'You can also choose an instance from this list.';
+  $('instance-meta').textContent = INSTANCE_HELP;
   const session = currentSession();
   for (const task of ['grounding', 'qa', 'caption']) { $(`${task}-text`).value = session.inputs[task] || ''; renderResult(task); }
   renderExamples(); updateControls(); updateAppearance(); loadScene(scene);
@@ -416,7 +416,6 @@ async function loadScenes() {
     chooseScene(state.scenes[0].id);
   } catch (error) {
     $('scene-select').replaceChildren(new Option('Scenes unavailable', ''));
-    $('saved-scene-name').textContent = 'Unavailable'; $('instance-count').textContent = '—';
     viewerMessage('The scene list could not be loaded. Check your connection and reload the page.', true);
     console.warn('Scene manifest unavailable:', error);
   }
@@ -427,7 +426,7 @@ function initViewer() {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(0xf4f7fc, 1);
-    renderer.domElement.setAttribute('aria-label', 'Interactive 3D scene. Drag to rotate, scroll to zoom, and use arrow keys to pan. Use the instance list to select an object with the keyboard.'); renderer.domElement.setAttribute('role', 'img'); renderer.domElement.tabIndex = 0;
+    renderer.domElement.setAttribute('aria-label', 'Interactive 3D scene. Drag to rotate, scroll to zoom, and use arrow keys to pan. Click an object to select it.'); renderer.domElement.setAttribute('role', 'img'); renderer.domElement.tabIndex = 0;
     host.prepend(renderer.domElement);
     camera = new THREE.PerspectiveCamera(42, 1, 0.001, 1000);
     controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = false; controls.screenSpacePanning = true; controls.maxPolarAngle = Math.PI * 0.94;

@@ -6,10 +6,10 @@
   <meta name="description" content="Explore saved 3D instance segmentation and interact with Alignment-Fusion through language grounding, question answering, and object captioning.">
   <title>Interactive Demo · Alignment-Fusion</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318253c'/%3E%3Cpath d='M7 23 16 7l9 16M11 17h10' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="demo.css?v=169715751437">
+  <link rel="stylesheet" href="demo.css?v=2ba26361cccf">
   <script src="config.js?v=5a031f2caf3f"></script>
   <script type="importmap">{"imports":{"three":"./vendor/three-0.170.0/build/three.module.js","three/addons/":"./vendor/three-0.170.0/examples/jsm/"}}</script>
-  <script defer src="bootstrap.js?v=1110f76e2ff7"></script>
+  <script defer src="bootstrap.js?v=9eb41e4b2827"></script>
 </head>
 <body>
   <a class="skip-link" href="#tasks">Skip to the demo</a>
@@ -37,12 +37,14 @@
           <div id="viewer-message" class="viewer-message" role="status"><span class="loading-ring" aria-hidden="true"></span><span id="viewer-message-text">Loading 3D scene…</span><button id="retry-scene" class="button secondary" type="button" hidden>Reload scene</button></div>
           <button id="reset-camera" class="viewer-reset" type="button" disabled>Reset view</button>
         </div>
-
+        <p class="viewer-help">Drag to rotate · Scroll to zoom · Right-drag to pan · Click an instance to select</p>
       </section>
       <div class="task-column">
         <section class="task-panel" id="panel-segmentation" role="tabpanel" aria-labelledby="tab-segmentation" tabindex="0">
           <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2>
-          <div class="detail-list"><div><span>Scene</span><strong id="saved-scene-name">Loading…</strong></div><div><span>Predicted instances</span><strong id="instance-count">—</strong></div><div><span>Model</span><strong>Stage 1</strong></div></div>
+          <div class="selection-card">
+            <div class="instance-control"><label id="instance-select-label" for="instance-select">Selected instance</label><div class="instance-row"><select id="instance-select" disabled><option value="">Select an instance in the scene</option></select><button id="clear-selection" class="button secondary small" type="button" disabled>Clear</button></div><p id="instance-meta" class="instance-meta">You can choose an instance from this list or scene view.</p></div>
+          </div>
         </section>
         <section class="task-panel" id="panel-grounding" role="tabpanel" aria-labelledby="tab-grounding" tabindex="0" hidden>
           <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Which object do you mean?</h2>
@@ -59,10 +61,6 @@
           <form data-task="caption"><label for="caption-text">Target description <span class="optional">(optional if an instance is selected)</span></label><textarea id="caption-text" name="text" rows="3" maxlength="500" placeholder="The chair beside the table"></textarea><p id="caption-target" class="target-note">Select an instance or enter a target description.</p><div class="examples" id="caption-examples" aria-label="Example caption targets"></div><button class="button primary run-button" type="submit" disabled>Generate caption</button></form>
           <div class="task-result" id="caption-result" role="status" aria-live="polite"><p class="result-placeholder">The caption will appear here alongside its highlighted target.</p></div>
         </section>
-        <div class="selection-card">
-          <p class="viewer-help">Drag to rotate · Scroll to zoom · Right-drag to pan · Click an instance to select</p>
-          <div class="instance-control"><label id="instance-select-label" for="instance-select">Selected instance</label><div class="instance-row"><select id="instance-select" disabled><option value="">Select an instance in the scene</option></select><button id="clear-selection" class="button secondary small" type="button" disabled>Clear</button></div><p id="instance-meta" class="instance-meta">You can also choose an instance from this list.</p></div>
-        </div>
       </div>
     </div>
   </main>
