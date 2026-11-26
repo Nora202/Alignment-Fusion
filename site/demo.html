@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="hybrid-demo/demo.css?v=44eab9b38f28">
   <script src="hybrid-demo/config.js?v=5a031f2caf3f"></script>
   <script type="importmap">{"imports":{"three":"./hybrid-demo/vendor/three-0.170.0/build/three.module.js","three/addons/":"./hybrid-demo/vendor/three-0.170.0/examples/jsm/"}}</script>
-  <script defer src="hybrid-demo/bootstrap.js?v=d1600ecd613f"></script>
+  <script defer src="hybrid-demo/bootstrap.js?v=2ae7d8b3ba68"></script>
 </head>
 <body>
   <a class="skip-link" href="#tasks">Skip to the demo</a>
@@ -20,7 +20,7 @@
   <main>
     <div class="intro-row">
       <div><p class="eyebrow">ALIGNMENT-FUSION DEMO</p><h1>Explore the scene.<br class="small-break"> Interact through language.</h1></div>
-      <div class="service-card"><span class="service-label">Live Stage 2</span><strong id="service-status" role="status">Checking service…</strong><button class="text-button" id="reconnect" type="button" hidden>Check connection</button></div>
+      <div class="service-card" data-language-only hidden><span class="service-label">Live Stage 2</span><strong id="service-status" role="status">Checking service…</strong><button class="text-button" id="reconnect" type="button" hidden>Check connection</button></div>
     </div>
     <div id="tasks" class="task-tabs" role="tablist" aria-label="3D understanding tasks">
       <button id="tab-segmentation" class="task-tab" type="button" role="tab" aria-selected="true" aria-controls="panel-segmentation" tabindex="0" data-task="segmentation"><span>Instance Segmentation</span></button>
@@ -41,7 +41,7 @@
       </section>
       <div class="task-column">
         <section class="task-panel" id="panel-segmentation" role="tabpanel" aria-labelledby="tab-segmentation" tabindex="0">
-          <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2><p>Explore saved predictions from <strong>stage1_special_best</strong>. Select an object in the scene or from the list to inspect it.</p>
+          <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2>
           <div class="detail-list"><div><span>Scene</span><strong id="saved-scene-name">Loading…</strong></div><div><span>Predicted instances</span><strong id="instance-count">—</strong></div><div><span>Model</span><strong>Stage 1</strong></div></div>
         </section>
         <section class="task-panel" id="panel-grounding" role="tabpanel" aria-labelledby="tab-grounding" tabindex="0" hidden>
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <p class="demo-footnote">Segmentation displays saved Stage 1 predictions. Language tasks use a separate, precomputed proposal set and matching features; grounding, answers, and captions are computed by <strong>stage2_best</strong> when you submit a request.</p>
+    <p class="demo-footnote" data-language-only hidden>Segmentation displays saved Stage 1 predictions. Language tasks use a separate, precomputed proposal set and matching features; grounding, answers, and captions are computed by <strong>stage2_best</strong> when you submit a request.</p>
   </main>
   <footer><span>From <strong>Alignment</strong> to <strong>Fusion</strong> in 3D Vision-Language</span><a href="https://nora202.github.io/Alignment-Fusion/">About this work</a></footer>
 </body>

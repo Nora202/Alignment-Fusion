@@ -142,6 +142,9 @@ function setTask(task, focus = false) {
   if (!TASKS.includes(task)) return;
   const changedGroup = (state.task === 'segmentation') !== (task === 'segmentation');
   state.task = task;
+  for (const element of document.querySelectorAll('[data-language-only]')) {
+    element.hidden = task === 'segmentation';
+  }
   if (changedGroup) state.selectedId = null;
   populateInstanceSelect();
   for (const item of TASKS) {
