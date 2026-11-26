@@ -22,5 +22,5 @@
     if (select) { select.replaceChildren(new Option('Scenes unavailable', '')); select.disabled = true; }
   }
   const watchdog = setTimeout(() => showFailure(new Error('Startup exceeded 25 seconds')), 25000);
-  import('./demo.js?v=dec0f5527fa3').then(() => { completed = true; clearTimeout(watchdog); }).catch((error) => { clearTimeout(watchdog); showFailure(error); });
+  import('./demo.js?v=437b937e680f').then(() => { completed = true; clearTimeout(watchdog); }).catch((error) => { clearTimeout(watchdog); showFailure(error); });
 })();

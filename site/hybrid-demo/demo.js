@@ -1,9 +1,12 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { createGradioTransport, validateZeroGPUHealth, validateZeroGPUInference } from './gradio-transport.js?v=d877f3878b38';
 
 const API_BASE = String(window.DEMO_API_BASE || '').replace(/\/+$/, '');
 const ASSET_BASE = String(window.DEMO_ASSET_BASE || '').replace(/\/+$/, '');
+const GRADIO_SPACE = String(window.DEMO_GRADIO_SPACE || '').trim();
+const gradioTransport = GRADIO_SPACE ? createGradioTransport(GRADIO_SPACE) : null;
 const TASKS = ['segmentation', 'grounding', 'qa', 'caption'];
 const RUN_LABELS = { grounding: 'Locate object', qa: 'Answer question', caption: 'Generate caption' };
 const RUNNING_LABELS = { grounding: 'Locating object…', qa: 'Generating answer…', caption: 'Generating caption…' };
@@ -51,6 +54,24 @@ async function fetchJSON(url, options = {}, timeout = 12000) {
     return data;
   } finally { clearTimeout(timer); }
 }
+async function requestLive(method, payload, onStatus) {
+  if (!gradioTransport) {
+    if (method === 'health') return fetchJSON(apiURL('/api/health'), {}, 12000);
+    return fetchJSON(apiURL('/api/infer'), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
+    }, 120000);
+  }
+  const controller = new AbortController();
+  const timer = setTimeout(() => {
+    const reason = new Error('The request took longer than two minutes. Please try again later.');
+    reason.name = 'TimeoutError'; controller.abort(reason);
+  }, 120000);
+  const options = { signal: controller.signal, onStatus };
+  try {
+    const result = await (method === 'health' ? gradioTransport.health(options) : gradioTransport.infer(payload, options));
+    return method === 'health' ? validateZeroGPUHealth(result) : validateZeroGPUInference(result);
+  } finally { clearTimeout(timer); }
+}
 function currentSession() {
   const id = state.scene?.id;
   if (!state.sessions.has(id)) state.sessions.set(id, { inputs: {}, results: {} });
@@ -91,20 +112,24 @@ function updateControls() {
 }
 async function checkService() {
   if (state.checking) return;
-  state.checking = true;
+  state.checking = true; state.ready = false;
   $('service-status').textContent = 'Checking service…';
   $('service-status').className = '';
   updateControls();
   try {
-    const health = await fetchJSON(apiURL('/api/health'), {}, 12000);
+    const health = await requestLive('health', null, (status) => {
+      if (status.message) $('service-status').textContent = status.message;
+    });
     state.ready = health.status === 'ready' && health.fusion === true;
     $('service-status').textContent = state.ready
-      ? `Ready · ${String(health.device || 'CPU').toUpperCase()}`
+      ? `Ready · ${health.backend === 'zerogpu' ? 'ZeroGPU' : String(health.device || 'CPU').toUpperCase()}`
       : (health.status === 'loading' || health.status === 'starting' ? 'Model is starting…' : 'Live service unavailable');
+    $('service-status').title = '';
     $('service-status').className = state.ready ? 'ready' : 'offline';
-  } catch {
+  } catch (error) {
     state.ready = false;
-    $('service-status').textContent = 'Live service unavailable';
+    $('service-status').textContent = error.name === 'TimeoutError' || error.name === 'AbortError' ? 'Service startup timed out' : 'Live service unavailable';
+    $('service-status').title = error.message || '';
     $('service-status').className = 'offline';
   } finally {
     state.checking = false;
@@ -143,15 +168,20 @@ function renderResult(task) {
     const p = document.createElement('p'); p.className = 'result-placeholder'; p.textContent = PLACEHOLDERS[task]; box.append(p); return;
   }
   if (result.loading) {
-    const p = document.createElement('p'); p.className = 'result-placeholder'; p.textContent = `${RUNNING_LABELS[task]} The service may queue requests.`; box.append(p); return;
+    const p = document.createElement('p'); p.className = 'result-placeholder'; p.textContent = result.status || `${RUNNING_LABELS[task]} The service may queue requests.`; box.append(p); return;
   }
   if (result.error) {
-    const p = document.createElement('p'); p.className = 'result-error'; p.textContent = result.error; box.append(p); return;
+    const p = document.createElement('p'); p.className = 'result-error'; p.textContent = result.error; box.append(p);
+    if (result.space_url) {
+      const link = document.createElement('a'); link.className = 'text-button'; link.href = result.space_url;
+      link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'Open Hugging Face Space'; box.append(link);
+    }
+    return;
   }
   const label = document.createElement('span'); label.className = 'result-label'; label.textContent = task === 'grounding' ? 'Located object' : task === 'qa' ? 'Model answer' : 'Generated caption';
   const p = document.createElement('p');
   const object = result.object_id !== null && result.object_id !== undefined ? objectById(result.object_id, task) : null;
-  p.textContent = result.text?.trim() || (object ? objectTitle(object, task) : 'The service returned no text.');
+  p.textContent = result.text?.trim() || (task === 'grounding' && object ? objectTitle(object, task) : 'The model returned no text.');
   box.append(label, p);
   if (object || Number.isFinite(result.elapsed_ms)) {
     const timing = document.createElement('div'); timing.className = 'result-timing';
@@ -190,10 +220,10 @@ async function runTask(task) {
   state.busy = true; state.pendingTask = task;
   renderResult(task); updateControls();
   try {
-    const result = await fetchJSON(apiURL('/api/infer'), {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ scene_id: sceneId, task, text, object_id: state.selectedId }),
-    }, 120000);
+    const result = await requestLive('infer', { scene_id: sceneId, task, text, object_id: state.selectedId }, (status) => {
+      session.results[task] = { loading: true, status: status.message || RUNNING_LABELS[task] };
+      if (state.scene?.id === sceneId) renderResult(task);
+    });
     session.results[task] = {
       text: typeof result.text === 'string' ? result.text : '',
       object_id: result.object_id ?? null,
@@ -204,12 +234,12 @@ async function runTask(task) {
       if (state.task === task && result.object_id !== null && result.object_id !== undefined) selectInstance(result.object_id);
     }
   } catch (error) {
-    const message = error.name === 'AbortError'
+    const message = error.name === 'AbortError' || error.name === 'TimeoutError'
       ? 'The request took too long. Please try again when the service is less busy.'
       : (error instanceof TypeError ? 'The inference service could not be reached. Check the connection and try again.' : error.message);
-    session.results[task] = { error: message };
+    session.results[task] = { error: message, space_url: error.code === 'quota' ? gradioTransport?.spaceURL : null };
     if (state.scene.id === sceneId) renderResult(task);
-    if (error instanceof TypeError || error.status === 503) {
+    if (error instanceof TypeError || error.status === 503 || ['connection', 'access', 'client_load', 'invalid_response'].includes(error.code)) {
       state.ready = false;
       $('service-status').textContent = 'Live service unavailable'; $('service-status').className = 'offline'; $('reconnect').hidden = false;
     }
@@ -377,8 +407,11 @@ function chooseScene(id) {
 async function loadScenes() {
   try {
     let data;
-    try { data = await fetchJSON(apiURL('/api/scenes'), {}, 5000); }
-    catch { data = await fetchJSON(assetURL('assets/scenes.json'), {}, 12000); }
+    if (gradioTransport) data = await fetchJSON(assetURL('assets/scenes.json'), {}, 12000);
+    else {
+      try { data = await fetchJSON(apiURL('/api/scenes'), {}, 5000); }
+      catch { data = await fetchJSON(assetURL('assets/scenes.json'), {}, 12000); }
+    }
     const scenes = Array.isArray(data) ? data : data.scenes;
     if (!Array.isArray(scenes) || !scenes.length) throw new Error('No scene manifest is available.');
     state.scenes = scenes.filter((scene) => typeof scene.id === 'string').map((scene) => ({ ...scene, objects: Array.isArray(scene.objects) ? scene.objects : [], live_objects: Array.isArray(scene.live_objects) ? scene.live_objects : [] }));
@@ -456,4 +489,6 @@ $('reconnect').addEventListener('click', checkService);
 $('retry-scene').addEventListener('click', () => { if (state.scene) loadScene(state.scene); else loadScenes(); });
 initViewer();
 updateControls();
-await Promise.allSettled([loadScenes(), checkService()]);
+// A sleeping language service must not block the saved-scene viewer startup.
+void checkService();
+await loadScenes();
