@@ -284,20 +284,25 @@ function updateAppearance() {
     object.visible = live ? selected : (isSaved && (state.mode === 'instances' || selected));
     object.renderOrder = selected ? 2 : 0;
     const material = object.material;
-    const vertexColors = !selected;
+    const vertexColors = !hasSelection;
     if (material.vertexColors !== vertexColors) { material.vertexColors = vertexColors; material.needsUpdate = true; }
-    material.color.set(selected ? '#df4b27' : '#ffffff');
-    material.opacity = selected ? 0.98 : (hasSelection ? (id < 0 ? 0.16 : 0.24) : 1);
+    material.color.set(selected ? '#df4b27' : (hasSelection ? '#cbd3df' : '#ffffff'));
+    material.opacity = selected ? 0.98 : 1;
     material.depthTest = !selected;
-    material.depthWrite = selected || state.selectedId === null;
+    material.depthWrite = true;
     material.size = Math.max(sceneRadius * 0.006, 0.008) * (selected ? 1.12 : 1);
   });
   update(instancesRoot, false); update(liveRoot, true);
   rgbRoot.traverse((object) => {
     if (!object.isPoints) return;
     object.material.size = Math.max(sceneRadius * 0.006, 0.008);
-    object.material.opacity = hasSelection ? 0.24 : 1;
-    object.material.depthWrite = !hasSelection;
+    const material = object.material;
+    const vertexColors = !hasSelection;
+    if (material.vertexColors !== vertexColors) { material.vertexColors = vertexColors; material.needsUpdate = true; }
+    material.color.set(hasSelection ? '#cbd3df' : '#ffffff');
+    material.opacity = 1;
+    material.depthTest = true;
+    material.depthWrite = true;
   });
   requestRender();
 }
