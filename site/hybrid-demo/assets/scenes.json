@@ -1,0 +1,1819 @@
+{
+  "scenes": [
+    {
+      "id": "scene0599_02",
+      "name": "Conference room \u00b7 scene0599_02",
+      "objects": [
+        {
+          "id": 0,
+          "class_name": "paper towel dispenser",
+          "confidence": 0.9998476505279541
+        },
+        {
+          "id": 1,
+          "class_name": "chair",
+          "confidence": 0.9998047947883606
+        },
+        {
+          "id": 2,
+          "class_name": "trash can",
+          "confidence": 0.9988887906074524
+        },
+        {
+          "id": 3,
+          "class_name": "chair",
+          "confidence": 0.9962581396102905
+        },
+        {
+          "id": 4,
+          "class_name": "telephone",
+          "confidence": 0.9952898621559143
+        },
+        {
+          "id": 5,
+          "class_name": "chair",
+          "confidence": 0.993248701095581
+        },
+        {
+          "id": 6,
+          "class_name": "chair",
+          "confidence": 0.9932383298873901
+        },
+        {
+          "id": 7,
+          "class_name": "window",
+          "confidence": 0.9900673627853394
+        },
+        {
+          "id": 8,
+          "class_name": "table",
+          "confidence": 0.9894009232521057
+        },
+        {
+          "id": 9,
+          "class_name": "chair",
+          "confidence": 0.9889802932739258
+        },
+        {
+          "id": 10,
+          "class_name": "chair",
+          "confidence": 0.9887483716011047
+        },
+        {
+          "id": 11,
+          "class_name": "chair",
+          "confidence": 0.9883336424827576
+        },
+        {
+          "id": 12,
+          "class_name": "whiteboard",
+          "confidence": 0.9861907958984375
+        },
+        {
+          "id": 13,
+          "class_name": "chair",
+          "confidence": 0.9807350039482117
+        },
+        {
+          "id": 14,
+          "class_name": "door",
+          "confidence": 0.9796203970909119
+        },
+        {
+          "id": 15,
+          "class_name": "backpack",
+          "confidence": 0.9753718376159668
+        },
+        {
+          "id": 16,
+          "class_name": "window",
+          "confidence": 0.9393143653869629
+        }
+      ],
+      "live_objects": [
+        {
+          "id": 0,
+          "class_name": "backpack",
+          "confidence": null
+        },
+        {
+          "id": 1,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 2,
+          "class_name": "telephone",
+          "confidence": null
+        },
+        {
+          "id": 3,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 4,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 5,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 6,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 7,
+          "class_name": "paper towel dispenser",
+          "confidence": null
+        },
+        {
+          "id": 8,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 9,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 10,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 11,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 12,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 13,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 14,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 15,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 16,
+          "class_name": "whiteboard",
+          "confidence": null
+        },
+        {
+          "id": 17,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 18,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 19,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 20,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 21,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 22,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 23,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 24,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 25,
+          "class_name": "telephone",
+          "confidence": null
+        },
+        {
+          "id": 26,
+          "class_name": "fire alarm",
+          "confidence": null
+        },
+        {
+          "id": 27,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 28,
+          "class_name": "telephone",
+          "confidence": null
+        },
+        {
+          "id": 29,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 30,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 31,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 32,
+          "class_name": "telephone",
+          "confidence": null
+        },
+        {
+          "id": 33,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 34,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 35,
+          "class_name": "clock",
+          "confidence": null
+        },
+        {
+          "id": 36,
+          "class_name": "power outlet",
+          "confidence": null
+        },
+        {
+          "id": 37,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 38,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 39,
+          "class_name": "music stand",
+          "confidence": null
+        },
+        {
+          "id": 40,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 41,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 42,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 43,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 44,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 45,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 46,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 47,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 48,
+          "class_name": "armchair",
+          "confidence": null
+        },
+        {
+          "id": 49,
+          "class_name": "board",
+          "confidence": null
+        }
+      ],
+      "assets": {
+        "rgb": "assets/scenes/scene0599_02/rgb.glb",
+        "instances": "assets/scenes/scene0599_02/instances.glb",
+        "live_instances": "assets/scenes/scene0599_02/live_instances.glb"
+      },
+      "examples": {
+        "grounding": [
+          "the chair beside the table",
+          "the door"
+        ],
+        "qa": [
+          "What color is the table?",
+          "What objects are in the room?"
+        ],
+        "caption": [
+          "the chair beside the table"
+        ]
+      },
+      "stage1_source": "precomputed_stage1_special_best",
+      "live_source": "fixed_stage2_predicted_proposals"
+    },
+    {
+      "id": "scene0578_01",
+      "name": "Office \u00b7 scene0578_01",
+      "objects": [
+        {
+          "id": 0,
+          "class_name": "backpack",
+          "confidence": 0.9999867677688599
+        },
+        {
+          "id": 1,
+          "class_name": "chair",
+          "confidence": 0.9984304904937744
+        },
+        {
+          "id": 2,
+          "class_name": "chair",
+          "confidence": 0.9983652830123901
+        },
+        {
+          "id": 3,
+          "class_name": "monitor",
+          "confidence": 0.997998058795929
+        },
+        {
+          "id": 4,
+          "class_name": "trash can",
+          "confidence": 0.9970802068710327
+        },
+        {
+          "id": 5,
+          "class_name": "whiteboard",
+          "confidence": 0.996647834777832
+        },
+        {
+          "id": 6,
+          "class_name": "chair",
+          "confidence": 0.9966158270835876
+        },
+        {
+          "id": 7,
+          "class_name": "ceiling",
+          "confidence": 0.9964392185211182
+        },
+        {
+          "id": 8,
+          "class_name": "whiteboard",
+          "confidence": 0.9887956380844116
+        },
+        {
+          "id": 9,
+          "class_name": "table",
+          "confidence": 0.9779101610183716
+        },
+        {
+          "id": 10,
+          "class_name": "chair",
+          "confidence": 0.9454518556594849
+        },
+        {
+          "id": 11,
+          "class_name": "window",
+          "confidence": 0.9433518648147583
+        },
+        {
+          "id": 12,
+          "class_name": "window",
+          "confidence": 0.9347261786460876
+        },
+        {
+          "id": 13,
+          "class_name": "door",
+          "confidence": 0.917354941368103
+        },
+        {
+          "id": 14,
+          "class_name": "keyboard",
+          "confidence": 0.8089261054992676
+        }
+      ],
+      "live_objects": [
+        {
+          "id": 0,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 1,
+          "class_name": "backpack",
+          "confidence": null
+        },
+        {
+          "id": 2,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 3,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 4,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 5,
+          "class_name": "whiteboard",
+          "confidence": null
+        },
+        {
+          "id": 6,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 7,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 8,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 9,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 10,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 11,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 12,
+          "class_name": "whiteboard",
+          "confidence": null
+        },
+        {
+          "id": 13,
+          "class_name": "tv",
+          "confidence": null
+        },
+        {
+          "id": 14,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 15,
+          "class_name": "dining table",
+          "confidence": null
+        },
+        {
+          "id": 16,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 17,
+          "class_name": "monitor",
+          "confidence": null
+        },
+        {
+          "id": 18,
+          "class_name": "box",
+          "confidence": null
+        },
+        {
+          "id": 19,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 20,
+          "class_name": "bag",
+          "confidence": null
+        },
+        {
+          "id": 21,
+          "class_name": "pipe",
+          "confidence": null
+        },
+        {
+          "id": 22,
+          "class_name": "object",
+          "confidence": null
+        },
+        {
+          "id": 23,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 24,
+          "class_name": "desk",
+          "confidence": null
+        },
+        {
+          "id": 25,
+          "class_name": "bag",
+          "confidence": null
+        },
+        {
+          "id": 26,
+          "class_name": "fire alarm",
+          "confidence": null
+        },
+        {
+          "id": 27,
+          "class_name": "keyboard piano",
+          "confidence": null
+        },
+        {
+          "id": 28,
+          "class_name": "clock",
+          "confidence": null
+        },
+        {
+          "id": 29,
+          "class_name": "end table",
+          "confidence": null
+        },
+        {
+          "id": 30,
+          "class_name": "object",
+          "confidence": null
+        },
+        {
+          "id": 31,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 32,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 33,
+          "class_name": "folded chair",
+          "confidence": null
+        },
+        {
+          "id": 34,
+          "class_name": "fire alarm",
+          "confidence": null
+        },
+        {
+          "id": 35,
+          "class_name": "cart",
+          "confidence": null
+        },
+        {
+          "id": 36,
+          "class_name": "box",
+          "confidence": null
+        },
+        {
+          "id": 37,
+          "class_name": "folded chair",
+          "confidence": null
+        },
+        {
+          "id": 38,
+          "class_name": "book",
+          "confidence": null
+        },
+        {
+          "id": 39,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 40,
+          "class_name": "bag",
+          "confidence": null
+        },
+        {
+          "id": 41,
+          "class_name": "music stand",
+          "confidence": null
+        },
+        {
+          "id": 42,
+          "class_name": "clock",
+          "confidence": null
+        },
+        {
+          "id": 43,
+          "class_name": "piano",
+          "confidence": null
+        },
+        {
+          "id": 44,
+          "class_name": "desk",
+          "confidence": null
+        },
+        {
+          "id": 45,
+          "class_name": "folded chair",
+          "confidence": null
+        },
+        {
+          "id": 46,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 47,
+          "class_name": "board",
+          "confidence": null
+        },
+        {
+          "id": 48,
+          "class_name": "object",
+          "confidence": null
+        },
+        {
+          "id": 49,
+          "class_name": "shelf",
+          "confidence": null
+        }
+      ],
+      "assets": {
+        "rgb": "assets/scenes/scene0578_01/rgb.glb",
+        "instances": "assets/scenes/scene0578_01/instances.glb",
+        "live_instances": "assets/scenes/scene0578_01/live_instances.glb"
+      },
+      "examples": {
+        "grounding": [
+          "the monitor",
+          "the door"
+        ],
+        "qa": [
+          "What color is the chair?",
+          "What objects are in the room?"
+        ],
+        "caption": [
+          "the monitor"
+        ]
+      },
+      "stage1_source": "precomputed_stage1_special_best",
+      "live_source": "fixed_stage2_predicted_proposals"
+    },
+    {
+      "id": "scene0217_00",
+      "name": "Dormitory \u00b7 scene0217_00",
+      "objects": [
+        {
+          "id": 0,
+          "class_name": "recycling bin",
+          "confidence": 0.9997139573097229
+        },
+        {
+          "id": 1,
+          "class_name": "door",
+          "confidence": 0.9992606043815613
+        },
+        {
+          "id": 2,
+          "class_name": "shelf",
+          "confidence": 0.9990999698638916
+        },
+        {
+          "id": 3,
+          "class_name": "chair",
+          "confidence": 0.9988906979560852
+        },
+        {
+          "id": 4,
+          "class_name": "recycling bin",
+          "confidence": 0.9986796379089355
+        },
+        {
+          "id": 5,
+          "class_name": "trash can",
+          "confidence": 0.9982454776763916
+        },
+        {
+          "id": 6,
+          "class_name": "window",
+          "confidence": 0.9979360699653625
+        },
+        {
+          "id": 7,
+          "class_name": "chair",
+          "confidence": 0.9977725148200989
+        },
+        {
+          "id": 8,
+          "class_name": "radiator",
+          "confidence": 0.9938095808029175
+        },
+        {
+          "id": 9,
+          "class_name": "trash can",
+          "confidence": 0.9907697439193726
+        },
+        {
+          "id": 10,
+          "class_name": "backpack",
+          "confidence": 0.9886074662208557
+        },
+        {
+          "id": 11,
+          "class_name": "desk",
+          "confidence": 0.9840560555458069
+        },
+        {
+          "id": 12,
+          "class_name": "bed",
+          "confidence": 0.9737259149551392
+        },
+        {
+          "id": 13,
+          "class_name": "bed",
+          "confidence": 0.9703695774078369
+        },
+        {
+          "id": 14,
+          "class_name": "desk",
+          "confidence": 0.9690457582473755
+        },
+        {
+          "id": 15,
+          "class_name": "dresser",
+          "confidence": 0.9645476937294006
+        },
+        {
+          "id": 16,
+          "class_name": "radiator",
+          "confidence": 0.9642987251281738
+        },
+        {
+          "id": 17,
+          "class_name": "wardrobe",
+          "confidence": 0.9641008377075195
+        },
+        {
+          "id": 18,
+          "class_name": "shelf",
+          "confidence": 0.9628455638885498
+        },
+        {
+          "id": 19,
+          "class_name": "window",
+          "confidence": 0.9576477408409119
+        },
+        {
+          "id": 20,
+          "class_name": "wardrobe",
+          "confidence": 0.9509644508361816
+        }
+      ],
+      "live_objects": [
+        {
+          "id": 0,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 1,
+          "class_name": "radiator",
+          "confidence": null
+        },
+        {
+          "id": 2,
+          "class_name": "backpack",
+          "confidence": null
+        },
+        {
+          "id": 3,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 4,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 5,
+          "class_name": "wardrobe",
+          "confidence": null
+        },
+        {
+          "id": 6,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 7,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 8,
+          "class_name": "dresser",
+          "confidence": null
+        },
+        {
+          "id": 9,
+          "class_name": "shelf",
+          "confidence": null
+        },
+        {
+          "id": 10,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 11,
+          "class_name": "wardrobe",
+          "confidence": null
+        },
+        {
+          "id": 12,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 13,
+          "class_name": "dresser",
+          "confidence": null
+        },
+        {
+          "id": 14,
+          "class_name": "radiator",
+          "confidence": null
+        },
+        {
+          "id": 15,
+          "class_name": "shelf",
+          "confidence": null
+        },
+        {
+          "id": 16,
+          "class_name": "desk",
+          "confidence": null
+        },
+        {
+          "id": 17,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 18,
+          "class_name": "desk",
+          "confidence": null
+        },
+        {
+          "id": 19,
+          "class_name": "bed",
+          "confidence": null
+        },
+        {
+          "id": 20,
+          "class_name": "bed",
+          "confidence": null
+        },
+        {
+          "id": 21,
+          "class_name": "window",
+          "confidence": null
+        },
+        {
+          "id": 22,
+          "class_name": "light switch",
+          "confidence": null
+        },
+        {
+          "id": 23,
+          "class_name": "pipe",
+          "confidence": null
+        },
+        {
+          "id": 24,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 25,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 26,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 27,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 28,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 29,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 30,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 31,
+          "class_name": "mouse",
+          "confidence": null
+        },
+        {
+          "id": 32,
+          "class_name": "mirror",
+          "confidence": null
+        },
+        {
+          "id": 33,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 34,
+          "class_name": "book",
+          "confidence": null
+        },
+        {
+          "id": 35,
+          "class_name": "dresser",
+          "confidence": null
+        },
+        {
+          "id": 36,
+          "class_name": "desk",
+          "confidence": null
+        },
+        {
+          "id": 37,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 38,
+          "class_name": "wardrobe",
+          "confidence": null
+        },
+        {
+          "id": 39,
+          "class_name": "wardrobe",
+          "confidence": null
+        },
+        {
+          "id": 40,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 41,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 42,
+          "class_name": "paper",
+          "confidence": null
+        },
+        {
+          "id": 43,
+          "class_name": "shelf",
+          "confidence": null
+        },
+        {
+          "id": 44,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 45,
+          "class_name": "mouse",
+          "confidence": null
+        },
+        {
+          "id": 46,
+          "class_name": "closet",
+          "confidence": null
+        },
+        {
+          "id": 47,
+          "class_name": "wardrobe",
+          "confidence": null
+        },
+        {
+          "id": 48,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 49,
+          "class_name": "wardrobe",
+          "confidence": null
+        }
+      ],
+      "assets": {
+        "rgb": "assets/scenes/scene0217_00/rgb.glb",
+        "instances": "assets/scenes/scene0217_00/instances.glb",
+        "live_instances": "assets/scenes/scene0217_00/live_instances.glb"
+      },
+      "examples": {
+        "grounding": [
+          "the bed",
+          "the door"
+        ],
+        "qa": [
+          "What color is the bed?",
+          "What objects are in the room?"
+        ],
+        "caption": [
+          "the bed"
+        ]
+      },
+      "stage1_source": "precomputed_stage1_special_best",
+      "live_source": "fixed_stage2_predicted_proposals"
+    },
+    {
+      "id": "scene0651_01",
+      "name": "Kitchen \u00b7 scene0651_01",
+      "objects": [
+        {
+          "id": 0,
+          "class_name": "recycling bin",
+          "confidence": 0.9995637536048889
+        },
+        {
+          "id": 1,
+          "class_name": "ceiling",
+          "confidence": 0.9994531273841858
+        },
+        {
+          "id": 2,
+          "class_name": "kitchen cabinet",
+          "confidence": 0.9981715679168701
+        },
+        {
+          "id": 3,
+          "class_name": "refrigerator",
+          "confidence": 0.9956101775169373
+        },
+        {
+          "id": 4,
+          "class_name": "sink",
+          "confidence": 0.994676947593689
+        },
+        {
+          "id": 5,
+          "class_name": "kitchen cabinet",
+          "confidence": 0.9943276047706604
+        },
+        {
+          "id": 6,
+          "class_name": "range hood",
+          "confidence": 0.9942822456359863
+        },
+        {
+          "id": 7,
+          "class_name": "kitchen cabinet",
+          "confidence": 0.9836752414703369
+        },
+        {
+          "id": 8,
+          "class_name": "kitchen counter",
+          "confidence": 0.9816545844078064
+        },
+        {
+          "id": 9,
+          "class_name": "chair",
+          "confidence": 0.9775803685188293
+        },
+        {
+          "id": 10,
+          "class_name": "table",
+          "confidence": 0.9703794717788696
+        },
+        {
+          "id": 11,
+          "class_name": "chair",
+          "confidence": 0.9564650654792786
+        },
+        {
+          "id": 12,
+          "class_name": "kitchen cabinet",
+          "confidence": 0.9384970664978027
+        },
+        {
+          "id": 13,
+          "class_name": "stove",
+          "confidence": 0.9305293560028076
+        },
+        {
+          "id": 14,
+          "class_name": "chair",
+          "confidence": 0.9256730079650879
+        },
+        {
+          "id": 15,
+          "class_name": "doorframe",
+          "confidence": 0.8752151131629944
+        }
+      ],
+      "live_objects": [
+        {
+          "id": 0,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 1,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 2,
+          "class_name": "refrigerator",
+          "confidence": null
+        },
+        {
+          "id": 3,
+          "class_name": "range hood",
+          "confidence": null
+        },
+        {
+          "id": 4,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 5,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 6,
+          "class_name": "kitchen counter",
+          "confidence": null
+        },
+        {
+          "id": 7,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 8,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 9,
+          "class_name": "sink",
+          "confidence": null
+        },
+        {
+          "id": 10,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 11,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 12,
+          "class_name": "stove",
+          "confidence": null
+        },
+        {
+          "id": 13,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 14,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 15,
+          "class_name": "table",
+          "confidence": null
+        },
+        {
+          "id": 16,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 17,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 18,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 19,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 20,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 21,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 22,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 23,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 24,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 25,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 26,
+          "class_name": "counter",
+          "confidence": null
+        },
+        {
+          "id": 27,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 28,
+          "class_name": "cabinet",
+          "confidence": null
+        },
+        {
+          "id": 29,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 30,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 31,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 32,
+          "class_name": "office chair",
+          "confidence": null
+        },
+        {
+          "id": 33,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 34,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 35,
+          "class_name": "dishwasher",
+          "confidence": null
+        },
+        {
+          "id": 36,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 37,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 38,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 39,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 40,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 41,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 42,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 43,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 44,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 45,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        },
+        {
+          "id": 46,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 47,
+          "class_name": "recycling bin",
+          "confidence": null
+        },
+        {
+          "id": 48,
+          "class_name": "fire extinguisher",
+          "confidence": null
+        },
+        {
+          "id": 49,
+          "class_name": "kitchen cabinet",
+          "confidence": null
+        }
+      ],
+      "assets": {
+        "rgb": "assets/scenes/scene0651_01/rgb.glb",
+        "instances": "assets/scenes/scene0651_01/instances.glb",
+        "live_instances": "assets/scenes/scene0651_01/live_instances.glb"
+      },
+      "examples": {
+        "grounding": [
+          "the refrigerator",
+          "the door"
+        ],
+        "qa": [
+          "What color is the refrigerator?",
+          "What objects are in the room?"
+        ],
+        "caption": [
+          "the refrigerator"
+        ]
+      },
+      "stage1_source": "precomputed_stage1_special_best",
+      "live_source": "fixed_stage2_predicted_proposals"
+    },
+    {
+      "id": "scene0702_00",
+      "name": "Bathroom \u00b7 scene0702_00",
+      "objects": [
+        {
+          "id": 0,
+          "class_name": "toilet",
+          "confidence": 0.9999927282333374
+        },
+        {
+          "id": 1,
+          "class_name": "ceiling",
+          "confidence": 0.9999412894248962
+        },
+        {
+          "id": 2,
+          "class_name": "trash can",
+          "confidence": 0.9998570084571838
+        },
+        {
+          "id": 3,
+          "class_name": "shower curtain",
+          "confidence": 0.9990537762641907
+        },
+        {
+          "id": 4,
+          "class_name": "toilet paper",
+          "confidence": 0.9982606172561646
+        },
+        {
+          "id": 5,
+          "class_name": "bathtub",
+          "confidence": 0.989531934261322
+        },
+        {
+          "id": 6,
+          "class_name": "soap dish",
+          "confidence": 0.9838279485702515
+        },
+        {
+          "id": 7,
+          "class_name": "towel",
+          "confidence": 0.9811049103736877
+        },
+        {
+          "id": 8,
+          "class_name": "toilet paper",
+          "confidence": 0.9804211258888245
+        },
+        {
+          "id": 9,
+          "class_name": "door",
+          "confidence": 0.9776450395584106
+        },
+        {
+          "id": 10,
+          "class_name": "soap dish",
+          "confidence": 0.9759529829025269
+        },
+        {
+          "id": 11,
+          "class_name": "telephone",
+          "confidence": 0.968615710735321
+        },
+        {
+          "id": 12,
+          "class_name": "shower wall",
+          "confidence": 0.9462351202964783
+        },
+        {
+          "id": 13,
+          "class_name": "bar",
+          "confidence": 0.9460225105285645
+        },
+        {
+          "id": 14,
+          "class_name": "doorframe",
+          "confidence": 0.9458588361740112
+        },
+        {
+          "id": 15,
+          "class_name": "towel",
+          "confidence": 0.7519384026527405
+        }
+      ],
+      "live_objects": [
+        {
+          "id": 0,
+          "class_name": "toilet",
+          "confidence": null
+        },
+        {
+          "id": 1,
+          "class_name": "ceiling",
+          "confidence": null
+        },
+        {
+          "id": 2,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 3,
+          "class_name": "shower curtain",
+          "confidence": null
+        },
+        {
+          "id": 4,
+          "class_name": "picture",
+          "confidence": null
+        },
+        {
+          "id": 5,
+          "class_name": "door",
+          "confidence": null
+        },
+        {
+          "id": 6,
+          "class_name": "trash can",
+          "confidence": null
+        },
+        {
+          "id": 7,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 8,
+          "class_name": "soap dish",
+          "confidence": null
+        },
+        {
+          "id": 9,
+          "class_name": "bathtub",
+          "confidence": null
+        },
+        {
+          "id": 10,
+          "class_name": "shower wall",
+          "confidence": null
+        },
+        {
+          "id": 11,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 12,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 13,
+          "class_name": "telephone",
+          "confidence": null
+        },
+        {
+          "id": 14,
+          "class_name": "soap dish",
+          "confidence": null
+        },
+        {
+          "id": 15,
+          "class_name": "soap dish",
+          "confidence": null
+        },
+        {
+          "id": 16,
+          "class_name": "bar",
+          "confidence": null
+        },
+        {
+          "id": 17,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 18,
+          "class_name": "chair",
+          "confidence": null
+        },
+        {
+          "id": 19,
+          "class_name": "ledge",
+          "confidence": null
+        },
+        {
+          "id": 20,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 21,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 22,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 23,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 24,
+          "class_name": "couch",
+          "confidence": null
+        },
+        {
+          "id": 25,
+          "class_name": "doorframe",
+          "confidence": null
+        },
+        {
+          "id": 26,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 27,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 28,
+          "class_name": "shower curtain",
+          "confidence": null
+        },
+        {
+          "id": 29,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 30,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 31,
+          "class_name": "rail",
+          "confidence": null
+        },
+        {
+          "id": 32,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 33,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 34,
+          "class_name": "object",
+          "confidence": null
+        },
+        {
+          "id": 35,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 36,
+          "class_name": "ledge",
+          "confidence": null
+        },
+        {
+          "id": 37,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 38,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 39,
+          "class_name": "ledge",
+          "confidence": null
+        },
+        {
+          "id": 40,
+          "class_name": "couch",
+          "confidence": null
+        },
+        {
+          "id": 41,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 42,
+          "class_name": "closet rod",
+          "confidence": null
+        },
+        {
+          "id": 43,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 44,
+          "class_name": "towel",
+          "confidence": null
+        },
+        {
+          "id": 45,
+          "class_name": "clothes",
+          "confidence": null
+        },
+        {
+          "id": 46,
+          "class_name": "toilet paper",
+          "confidence": null
+        },
+        {
+          "id": 47,
+          "class_name": "shower curtain rod",
+          "confidence": null
+        },
+        {
+          "id": 48,
+          "class_name": "mirror",
+          "confidence": null
+        },
+        {
+          "id": 49,
+          "class_name": "towel",
+          "confidence": null
+        }
+      ],
+      "assets": {
+        "rgb": "assets/scenes/scene0702_00/rgb.glb",
+        "instances": "assets/scenes/scene0702_00/instances.glb",
+        "live_instances": "assets/scenes/scene0702_00/live_instances.glb"
+      },
+      "examples": {
+        "grounding": [
+          "the toilet",
+          "the door"
+        ],
+        "qa": [
+          "What color is the toilet?",
+          "What objects are in the room?"
+        ],
+        "caption": [
+          "the toilet"
+        ]
+      },
+      "stage1_source": "precomputed_stage1_special_best",
+      "live_source": "fixed_stage2_predicted_proposals"
+    }
+  ]
+}
