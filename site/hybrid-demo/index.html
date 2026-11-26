@@ -41,23 +41,23 @@
       </section>
       <div class="task-column">
         <section class="task-panel" id="panel-segmentation" role="tabpanel" aria-labelledby="tab-segmentation" tabindex="0">
-          <span class="mode-label saved">PRECOMPUTED · STAGE 1</span><h2>Inspect the instance predictions</h2>
+          <h2>Inspect the instance predictions</h2>
           <div class="selection-card">
             <div class="instance-control"><label id="instance-select-label" for="instance-select">Selected instance</label><div class="instance-row"><select id="instance-select" disabled><option value="">Select an instance in the scene</option></select><button id="clear-selection" class="button secondary small" type="button" disabled>Clear</button></div><p id="instance-meta" class="instance-meta">You can choose an instance from this list or scene view.</p></div>
           </div>
         </section>
         <section class="task-panel" id="panel-grounding" role="tabpanel" aria-labelledby="tab-grounding" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Which object do you mean?</h2>
+          <h2>Which object do you mean?</h2>
           <form data-task="grounding"><label for="grounding-text">Object description</label><textarea id="grounding-text" name="text" rows="3" maxlength="500" placeholder="The chair closest to the table" required></textarea><div class="examples" id="grounding-examples" aria-label="Example object descriptions"></div><button class="button primary run-button" type="submit" disabled>Locate object</button></form>
           <div class="task-result" id="grounding-result" role="status" aria-live="polite"><p class="result-placeholder">The prediction will appear here and highlight an object in the scene.</p></div>
         </section>
         <section class="task-panel" id="panel-qa" role="tabpanel" aria-labelledby="tab-qa" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Ask about this scene</h2>
+          <h2>Ask about this scene</h2>
           <form data-task="qa"><label for="qa-text">Your question</label><textarea id="qa-text" name="text" rows="3" maxlength="500" placeholder="What color is the table?" required></textarea><div class="examples" id="qa-examples" aria-label="Example questions"></div><button class="button primary run-button" type="submit" disabled>Answer question</button></form>
           <div class="task-result" id="qa-result" role="status" aria-live="polite"><p class="result-placeholder">The model’s answer will appear here.</p></div>
         </section>
         <section class="task-panel" id="panel-caption" role="tabpanel" aria-labelledby="tab-caption" tabindex="0" hidden>
-          <span class="mode-label live">LIVE INFERENCE · STAGE 2</span><h2>Describe a target instance</h2>
+          <h2>Describe a target instance</h2>
           <form data-task="caption"><label for="caption-text">Target description <span class="optional">(optional if an instance is selected)</span></label><textarea id="caption-text" name="text" rows="3" maxlength="500" placeholder="The chair beside the table"></textarea><p id="caption-target" class="target-note">Select an instance or enter a target description.</p><div class="examples" id="caption-examples" aria-label="Example caption targets"></div><button class="button primary run-button" type="submit" disabled>Generate caption</button></form>
           <div class="task-result" id="caption-result" role="status" aria-live="polite"><p class="result-placeholder">The caption will appear here alongside its highlighted target.</p></div>
         </section>
